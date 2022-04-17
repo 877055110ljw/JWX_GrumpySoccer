@@ -6,10 +6,12 @@ using UnityEngine.UI;
 public class goalCtr2 : MonoBehaviour
 {
     public Text lx_P2_Text;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject scoreUI = GameObject.FindWithTag("score1");
+        lx_P2_Text  = scoreUI.GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -26,5 +28,5 @@ public class goalCtr2 : MonoBehaviour
             lx_P2_Text.text = score_P2.ToString();
             Debug.Log("score_P2" + lx_P2_Text);
         }
-            }
+    }
 }

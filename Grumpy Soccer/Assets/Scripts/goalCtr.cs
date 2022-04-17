@@ -5,12 +5,27 @@ using UnityEngine.UI;
 
 public class goalCtr : MonoBehaviour
 {
-    public Text m_P1_Text;
-    public Text m_P2_Text;
+    private Text m_score_Text;
+    private GameObject resetBtn;
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject scoreUI = null;
+        if (this.name == "goalCtrl")
+            scoreUI = GameObject.FindWithTag("score1");
+        else
+            scoreUI = GameObject.FindWithTag("score2");
+        m_score_Text = scoreUI.GetComponent<Text>();
+
+        GameObject[] pAllObjects = (GameObject[])Resources.FindObjectsOfTypeAll(typeof(GameObject));
+        foreach (GameObject pObject in pAllObjects)
+        {
+            if (pObject.tag == "resetBtn")
+            {
+                resetBtn = pObject;
+                break;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -22,10 +37,11 @@ public class goalCtr : MonoBehaviour
     {
         if (col.gameObject.name == "ball")
         {
-            int score = int.Parse(m_P1_Text.text);
+            int score = int.Parse(m_score_Text.text);
             score += 1;
-            m_P1_Text.text = score.ToString();
-            Debug.Log("score" + m_P1_Text.text);
+            m_score_Text.text = score.ToString();
+            Debug.Log("score" + m_score_Text.text);
+            resetBtn.SetActive(true);
         }
     }
    
